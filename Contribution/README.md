@@ -18,4 +18,21 @@
 
 ### Step 3
 
-完成经验贴的撰写后，可以
+完成经验贴的撰写后，通过以下命令来提交，以便后续审核
+
+- 创建分支 
+
+> git checkout -b YourName  
+> **将 YourName 替换成具体内容**，如 git checkout -b CaiZeSen
+
+- 提交修改
+
+> git add .
+>  
+> git commit -m "message" 
+> 
+> git push origin YourName
+
+### Step 4
+
+随后会审阅提交的内容，确认无误后将合并到 main 分支，并删除创建的 YourName 分支，下次如果要修改的话，请先切换到 main 分支并 pull 更新分支里的内容，然后修改后根据以上流程重新创建分支并提交
