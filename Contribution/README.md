@@ -4,7 +4,12 @@
 
 ### Step 1
 
-首先在本地 clone 此项目，然后在 夏令营 或 预推免 对应的目录中撰写经验贴。
+首先在本地 clone 此项目，然后创建相应的分支
+
+> git checkout -b YourName  
+> **将 YourName 替换成具体内容**，如 git checkout -b CaiZeSen
+
+随后在 夏令营 或 预推免 对应的目录中撰写经验贴。
 
 **如果您已经在其他平台发布相关经验贴，可以直接在 README 添加相关 URL，以减少您的工作量**
 
@@ -20,16 +25,10 @@
 
 完成经验贴的撰写后，通过以下命令来提交，以便后续审核
 
-- 创建分支 
-
-> git checkout -b YourName  
-> **将 YourName 替换成具体内容**，如 git checkout -b CaiZeSen
-
-- 提交修改
-
 > git add .
 >  
 > git commit -m "message" 
+> message 可以添加注释信息
 > 
 > git push origin YourName
 
