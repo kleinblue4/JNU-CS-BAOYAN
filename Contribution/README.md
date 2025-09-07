@@ -6,8 +6,8 @@
 
 首先在本地 clone 此项目，然后创建相应的分支
 
-> git checkout -b YourName  
-> **将 YourName 替换成具体内容**，如 git checkout -b CaiZeSen
+> git checkout -b [YourName]  
+> **将 [YourName] 替换成具体内容**，如 git checkout -b CaiZeSen
 
 随后在 夏令营 或 预推免 对应的目录中撰写经验贴。
 
@@ -28,10 +28,9 @@
 > git add .
 >  
 > git commit -m "message" 
-> message 可以添加注释信息
 > 
-> git push origin YourName
+> git push origin [YourName]
 
 ### Step 4
 
-随后会审阅提交的内容，确认无误后将合并到 main 分支，并删除创建的 YourName 分支，下次如果要修改的话，请先切换到 main 分支并 pull 更新分支里的内容，然后修改后根据以上流程重新创建分支并提交
+随后会审阅提交的内容，确认无误后将合并到 main 分支，并删除创建的 [YourName] 分支，下次如果要修改的话，请先切换到 main 分支并 pull 更新分支里的内容，然后修改后根据以上流程重新创建分支并提交
