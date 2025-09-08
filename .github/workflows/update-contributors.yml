@@ -12,32 +12,54 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Scan Directories for Contributors
+        with:
+          fetch-depth: 0  # 获取完整 Git 历史以提取提交者
+      - name: Scan Directories and Parse Usernames
         run: |
           echo "生成贡献者列表..."
-          # 扫描 SummerCamp 和 YuTuiMian 下的所有年份子目录中的贡献者文件夹
-          contributors=$(find SummerCamp/*/ YuTuiMian/*/ -maxdepth 1 -type d | grep -vE '^(SummerCamp/[^/]+|YuTuiMian/[^/]+)$' | sed 's|.*/||' | sort | uniq)
-          # 如果没有找到贡献者，设置为空字符串
+          contributors=""
+          # 扫描 SummerCamp 和 YuTuiMian 下的所有年份子目录
+          for dir in SummerCamp/*/* YuTuiMian/*/*; do
+            if [ -d "$dir" ] && [ -f "$dir/README.md" ]; then
+              folder=$(basename "$dir")
+              # 尝试从 README.md 获取 Contributor-Username
+              username=$(grep -m 1 '^Contributor-Username:' "$dir/README.md" | sed 's/Contributor-Username: //')
+              if [ -n "$username" ]; then
+                echo "找到元数据用户名: $folder -> $username"
+                contributors="$contributors,$username"
+              else
+                # 从 Git 提交历史获取用户名
+                git_username=$(git log --pretty="%an" "$dir/README.md" | head -n 1 | xargs -I {} curl -s -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
+                  "https://api.github.com/search/users?q={} in:name" | jq -r '.items[0].login // ""')
+                if [ -n "$git_username" ]; then
+                  echo "找到 Git 用户名: $folder -> $git_username"
+                  contributors="$contributors,$git_username"
+                else
+                  echo "无元数据或 Git 用户名，使用文件夹名: $folder"
+                  contributors="$contributors,$folder"
+                fi
+              fi
+            fi
+          done
+          # 清理贡献者列表，去除开头的逗号并去重
+          contributors=$(echo "$contributors" | tr ',' '\n' | sort | uniq | tr '\n' ',' | sed 's/,$//')
           if [ -z "$contributors" ]; then
             echo "CONTRIBUTORS=" >> $GITHUB_ENV
           else
-            # 转换为逗号分隔，去除多余换行和逗号
-            echo "CONTRIBUTORS=$(echo "$contributors" | tr '\n' ',' | sed 's/,$//')" >> $GITHUB_ENV
+            echo "CONTRIBUTORS=$contributors" >> $GITHUB_ENV
           fi
-          # 调试：输出贡献者列表
-          echo "Found contributors: ${CONTRIBUTORS}"
-      - name: Generate Contributors List
-        uses: akhilmhdh/contributors-readme-action@v2.2
-        with:
-          readme_path: 'README.md'
-          commit_msg: 'docs: 更新贡献者列表（含头像）'
-          contributor_template: |-
-            <tr><td><img src="https://github.com/{{contributor}}.png?size=40" alt="{{contributor}}" width="40" height="40" onerror="this.src='https://github.com/identicons/anonymous.png'"></td><td>{{contributor}}</td></tr>
-          image_size: 40
-          use_username: false  # 使用文件夹名而非 Git 用户名
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          CONTRIBUTORS: ${{ env.CONTRIBUTORS }}
+          echo "最终贡献者列表: ${CONTRIBUTORS}"
+      - name: Generate Contributors Table
+        run: |
+          echo "更新 README.md 贡献者表格..."
+          table="| 头像 | 贡献者 |\n|------|--------|\n"
+          if [ -n "${CONTRIBUTORS}" ]; then
+            IFS=',' read -ra contrib_array <<< "${CONTRIBUTORS}"
+            for contributor in "${contrib_array[@]}"; do
+              table="$table| <img src=\"https://github.com/$contributor.png?size=40\" alt=\"$contributor\" width=\"40\" height=\"40\" onerror=\"this.src='https://github.com/identicons/anonymous.png'\"> | $contributor |\n"
+            done
+          fi
+          sed -i '/<!-- ALL-CONTRIBUTORS-LIST:START -->/,/<!-- ALL-CONTRIBUTORS-LIST:END -->/c\<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->\n'"$table"'\n<!-- ALL-CONTRIBUTORS-LIST:END -->' README.md
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v6
         with:
