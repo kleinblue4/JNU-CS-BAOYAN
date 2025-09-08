@@ -5,7 +5,11 @@ on:
     types: [closed]  # 在 PR 合并时触发
   schedule:
     - cron: '0 0 * * *'  # 每天 UTC 午夜运行
-  workflow_dispatch:  # Allow manual trigger
+  workflow_dispatch:  # 支持手动触发
+
+permissions:
+  contents: write  # 允许写仓库内容
+  pull-requests: write  # 允许创建/更新 PR
 
 jobs:
   update-contributors:
@@ -68,16 +72,12 @@ jobs:
               echo "生成头像 URL: https://github.com/$contributor.png?size=40"
             done
           fi
-          # 调试: 输出更新前 README.md 贡献者部分
-          echo "更新前 README.md 贡献者部分:"
-          grep -A 10 '<!-- ALL-CONTRIBUTORS-LIST:START -->' README.md || true
           # 将表格写入临时文件并验证
           echo -e "$table" > temp_table.md
           echo "生成表格内容:"
           cat temp_table.md
           # 替换 README.md 中的贡献者表格
           sed -i.bak '/<!-- ALL-CONTRIBUTORS-LIST:START -->/,/<!-- ALL-CONTRIBUTORS-LIST:END -->/c\<!-- ALL-CONTRIBUTORS-LIST:START -->\n'"$table"'\n<!-- ALL-CONTRIBUTORS-LIST:END -->' README.md
-          # 调试: 输出更新后 README.md 贡献者部分（忽略退出码）
           echo "更新后 README.md 贡献者部分:"
           grep -A 10 '<!-- ALL-CONTRIBUTORS-LIST:START -->' README.md || true
       - name: Commit Changes
