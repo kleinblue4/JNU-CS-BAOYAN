@@ -68,8 +68,22 @@ jobs:
               echo "生成头像 URL: https://github.com/$contributor.png?size=40"
             done
           fi
+          # 将表格写入临时文件并验证
+          echo -e "$table" > temp_table.md
+          echo "生成表格内容:"
+          cat temp_table.md
           # 替换 README.md 中的贡献者表格
-          sed -i '/<!-- ALL-CONTRIBUTORS-LIST:START -->/,/<!-- ALL-CONTRIBUTORS-LIST:END -->/c\<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->\n'"$table"'\n<!-- ALL-CONTRIBUTORS-LIST:END -->' README.md
+          sed -i.bak '/<!-- ALL-CONTRIBUTORS-LIST:START -->/,/<!-- ALL-CONTRIBUTORS-LIST:END -->/c\<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->\n'"$table"'\n<!-- ALL-CONTRIBUTORS-LIST:END -->' README.md
+          echo "更新后 README.md 贡献者部分:"
+          grep -A 10 '<!-- ALL-CONTRIBUTORS-LIST:START -->' README.md
+      - name: Commit Changes
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          git add README.md
+          git diff --staged --quiet || git commit -m 'docs: 更新贡献者列表（含头像）'
+          echo "Git 状态:"
+          git status
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v6
         with:
