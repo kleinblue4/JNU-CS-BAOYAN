@@ -15,15 +15,15 @@ jobs:
       - name: Generate Contributors List
         uses: akhilmhdh/contributors-readme-action@v2.2
         with:
-          readme_path: 'README.md'  # 要更新的文件
-          commit_msg: 'docs: update contributors list with avatars'  # 提交消息
-          contributor_template: '<tr><td><img src="https://github.com/%contributor%.png?size=40" alt="%contributor%" width="40" height="40"></td><td>%contributor%</td><td><a href="%path%">%contribution%</a></td></tr>'  # 自定义表格行模板，包括头像
-          image_size: 40  # 头像大小
-          columns_per_row: 1  # 每行列数（根据需要调整）
-          output_path: './.all-contributorsrc'  # 临时文件（可选）
-          use_username: true  # 使用 GitHub 用户名
+            readme_path: 'README.md'
+            commit_msg: 'docs: update contributors list with avatars'
+            contributor_template: '<tr><td><img src="https://github.com/%contributor%.png?size=40" alt="%contributor%" width="40" height="40"></td><td>%contributor%</td></tr>'  # 仅头像和用户名
+            image_size: 40
+            columns_per_row: 1
+            output_path: './.all-contributorsrc'
+            use_username: true
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # 必需，用于 API 访问
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v6
         with:
