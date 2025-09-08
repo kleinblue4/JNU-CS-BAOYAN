@@ -23,7 +23,7 @@
 
 感谢以下同学为项目贡献了宝贵的保研经验！（按字母顺序排列）
 
-<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- ALL-CONTRIBUTORS-LIST:START -->
 | 头像 | 贡献者 |
 |------|--------|
 <!-- ALL-CONTRIBUTORS-LIST:END -->
