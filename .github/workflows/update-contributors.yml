@@ -80,6 +80,7 @@ jobs:
           sed -i.bak '/<!-- ALL-CONTRIBUTORS-LIST:START -->/,/<!-- ALL-CONTRIBUTORS-LIST:END -->/c\<!-- ALL-CONTRIBUTORS-LIST:START -->\n'"$table"'\n<!-- ALL-CONTRIBUTORS-LIST:END -->' README.md
           echo "更新后 README.md 贡献者部分:"
           grep -A 10 '<!-- ALL-CONTRIBUTORS-LIST:START -->' README.md || true
+          rm temp_table.md
       - name: Commit Changes
         run: |
           git config --global user.name 'github-actions[bot]'
