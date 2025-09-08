@@ -1,5 +1,3 @@
-
-
 # JNU-CS-BAOYAN
 
 欢迎体验 **江南大学计算机相关专业保研经验分享项目**！本项目旨在收集和整理保研经验贴，为有志于升学的学弟学妹提供参考，帮助大家更好地准备夏令营和预推免。
@@ -15,11 +13,11 @@
 ## 🤝 如何贡献
 
 我们热烈欢迎保研上岸的同学和往届学长学姐分享经验！您可以通过 GitHub Web 界面快速添加经验贴，无需任何 Git 工具。具体步骤：
-1. 访问 [贡献指南](./Contribution/PR_submission_guide.md)，按照指引在 `SummerCamp` 或 `YuTuiMian` 目录下创建 `README.md` 文件。
+1. 访问 [贡献指南](./Contribution/README.md)，按照指引在 `SummerCamp` 或 `YuTuiMian` 目录下创建 `README.md` 文件。
 2. 使用 [经验贴模板](./Contribution/Template.md) 撰写内容，或直接链接到您在其他平台（如博客、知乎）发布的经验贴。
 3. 通过 GitHub 提交拉取请求（PR），等待审核。
 
-**快速上手**：只需几分钟即可完成贡献，点击 [贡献指南](./Contribution/PR_submission_guide.md) 开始！
+**快速上手**：只需几分钟即可完成贡献，点击 [贡献指南](./Contribution/README.md) 开始！
 
 ## 🌟 贡献者
 
@@ -30,17 +28,16 @@
 |------|--------|
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
-**自动更新**：本列表由 GitHub Action 自动生成，基于 `SummerCamp` 和 `YuTuiMian` 目录中的文件夹。每当新的经验贴 PR 合并后，列表将自动更新，包括贡献者头像。
+**自动更新**：本列表由 GitHub Action 自动生成，基于 `SummerCamp` 和 `YuTuiMian` 下的所有年份目录。每当新的经验贴 PR 合并后，列表将自动更新，包括贡献者头像。
 
 ## 📢 注意事项
 
 - **内容建议**：经验贴应清晰、简洁、有条理，提供对学弟学妹有价值的建议。
 - **格式规范**：请遵循模板或使用标准的 Markdown 格式，确保内容易读。
 - **问题反馈**：如有疑问或建议，请通过以下方式联系：
-  - 在 GitHub 提交 [Issue](https://github.com/<仓库名称>/issues)。
+  - 在 GitHub 提交 [Issue](https://github.com/JNU-CS-BAOYAN/issues)。
   - 邮箱：a2194037898@163.com
 
 ## 🎉 感谢
 
-感谢所有分享经验的同学！您的贡献将帮助更多学弟学妹顺利保研。让我们一起为江南大学计算机专业的保研之路添砖加瓦！🚀
-
+感谢所有分享经验的同学！您的贡献将帮助更多学弟学妹顺利保研。🚀
