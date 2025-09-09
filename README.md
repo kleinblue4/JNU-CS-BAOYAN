@@ -19,13 +19,6 @@
 
 **快速上手**：只需几分钟即可完成贡献，点击 [贡献指南](./Contribution/README.md) 开始！
 
-## 🌟 贡献者
-
-感谢以下同学为项目贡献了宝贵的保研经验！（按字母顺序排列）
-
-<!-- ALL-CONTRIBUTORS-LIST:START -->
-<div style="display: flex; flex-wrap: wrap;"> <a href="https://github.com/kleinblue1"><img src="https://github.com/kleinblue1.png?size=40" alt="kleinblue1" title="kleinblue1" width="40" height="40" style="margin: 5px;" onerror="this.src='https://github.com/avatars/u/0'"></a> <a href="https://github.com/kleinblue4"><img src="https://github.com/kleinblue4.png?size=40" alt="kleinblue4" title="kleinblue4" width="40" height="40" style="margin: 5px;" onerror="this.src='https://github.com/avatars/u/0'"></a></div>
-<!-- ALL-CONTRIBUTORS-LIST:END -->
 
 **自动更新**：本列表由 GitHub Action 自动生成，基于 `SummerCamp` 和 `YuTuiMian` 下的所有年份目录。每当新的经验贴 PR 合并后，列表将自动更新，包括贡献者头像。
 
@@ -36,6 +29,15 @@
 - **问题反馈**：如有疑问或建议，请通过以下方式联系：
   - 在 GitHub 提交 [Issue](https://github.com/kleinblue4/JNU-CS-BAOYAN/issues)。
   - 邮箱：a2194037898@163.com
+
+## 🌟 贡献者
+
+感谢以下同学为项目贡献了宝贵的保研经验！
+
+<!-- ALL-CONTRIBUTORS-LIST:START -->
+<div style="display: flex; flex-wrap: wrap;"> <a href="https://github.com/kleinblue1"><img src="https://github.com/kleinblue1.png?size=40" alt="kleinblue1" title="kleinblue1" width="40" height="40" style="margin: 5px;" onerror="this.src='https://github.com/avatars/u/0'"></a> <a href="https://github.com/kleinblue4"><img src="https://github.com/kleinblue4.png?size=40" alt="kleinblue4" title="kleinblue4" width="40" height="40" style="margin: 5px;" onerror="this.src='https://github.com/avatars/u/0'"></a></div>
+<!-- ALL-CONTRIBUTORS-LIST:END -->
+
 
 ## 🎉 感谢
 
