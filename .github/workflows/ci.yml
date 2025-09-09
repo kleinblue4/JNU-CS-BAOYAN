@@ -1,0 +1,34 @@
+# .github/workflows/ci.yml
+name: PR-Guard
+on:
+  pull_request:
+    paths: '**/*'
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0          # 需要完整历史做 diff
+      - name: Get changed files
+        id: changed
+        run: |
+          # 找出本次 PR 新增目录
+          NEW_DIRS=$(git diff --name-only origin/main...HEAD | xargs -I{} dirname {} | sort -u | grep -v '^\.$')
+          echo "NEW_DIRS=$NEW_DIRS" >> $GITHUB_OUTPUT
+      - name: Ensure unique folder & README
+        run: |
+          for d in ${{ steps.changed.outputs.NEW_DIRS }}; do
+            if [ -d "$d" ] && [ ! -f "$d/README.md" ]; then
+              echo "❌ $d 缺少 README.md"; exit 1
+            fi
+          done
+          # 检查根目录下是否已存在同名文件夹（防止重复）
+          for d in ${{ steps.changed.outputs.NEW_DIRS }}; do
+            BASE=$(basename "$d")
+            if [ $(find . -maxdepth 1 -type d -name "$BASE" | wc -l) -gt 1 ]; then
+              echo "❌ 文件夹 $BASE 已存在"; exit 1
+            fi
+          done
+          echo "✅ 检查通过"
