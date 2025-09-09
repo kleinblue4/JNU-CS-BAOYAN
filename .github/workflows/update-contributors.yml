@@ -59,7 +59,7 @@ jobs:
           else
             echo "CONTRIBUTORS=$contributors" >> $GITHUB_ENV
           fi
-          echo "最终贡献者列表: ${CONTRIBUTORS}"
+          echo "最终贡献者列表: ${contributors}"
       - name: Generate Contributors Table
         run: |
           echo "更新 README.md 贡献者表格..."
@@ -77,9 +77,11 @@ jobs:
           echo "生成表格内容:"
           cat temp_table.md
           # 替换 README.md 中的贡献者表格
-          sed -i.bak '/<!-- ALL-CONTRIBUTORS-LIST:START -->/,/<!-- ALL-CONTRIBUTORS-LIST:END -->/c\<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->\n'"$table"'\n<!-- ALL-CONTRIBUTORS-LIST:END -->' README.md
+          sed -i.bak '/<!-- ALL-CONTRIBUTORS-LIST:START -->/,/<!-- ALL-CONTRIBUTORS-LIST:END -->/c\<!-- ALL-CONTRIBUTORS-LIST:START -->\n'"$table"'\n<!-- ALL-CONTRIBUTORS-LIST:END -->' README.md
           echo "更新后 README.md 贡献者部分:"
           grep -A 10 '<!-- ALL-CONTRIBUTORS-LIST:START -->' README.md || true
+          rm temp_table.md
+          rm README.md.bak
       - name: Commit Changes
         run: |
           git config --global user.name 'github-actions[bot]'
