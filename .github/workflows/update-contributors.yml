@@ -30,24 +30,25 @@ jobs:
             if [ -d "$dir" ] && [ -f "$dir/README.md" ]; then
               folder=$(basename "$dir")
               echo "处理文件夹: $dir"
-              # 从 Git 提交历史获取提交者邮箱
-              git_email=$(git log --pretty="%ae" "$dir/README.md" | head -n 1)
+              # 从 Git 提交历史获取最新提交的 SHA 和邮箱
+              commit_info=$(git log -1 --pretty="%H %ae" "$dir/README.md")
+              commit_sha=$(echo "$commit_info" | awk '{print $1}')
+              git_email=$(echo "$commit_info" | awk '{print $2}')
+              echo "最新提交 SHA: $commit_sha"
               echo "Git 提交者邮箱: $git_email"
-              if [ -n "$git_email" ]; then
-                # 尝试通过 GitHub API 获取 GitHub 用户名
+              if [ -n "$commit_sha" ] && [ -n "$git_email" ]; then
+                # 通过 GitHub API 获取提交者的 GitHub 用户名
                 github_username=$(curl -s -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
-                  "https://api.github.com/search/users?q=$git_email in:email" | jq -r '.items[0].login // ""')
+                  "https://api.github.com/repos/${{ github.repository }}/commits/$commit_sha" | jq -r '.author.login // ""')
                 echo "API 查询结果: $github_username"
                 if [ -n "$github_username" ]; then
                   echo "找到 GitHub 用户名: $folder -> $github_username"
                   contributors="$contributors$github_username,"
                 else
-                  echo "无 GitHub 用户名，回退到文件夹名: $folder"
-                  contributors="$contributors$folder,"
+                  echo "无 GitHub 用户名，跳过文件夹: $folder"
                 fi
               else
-                echo "无 Git 提交者信息，回退到文件夹名: $folder"
-                contributors="$contributors$folder,"
+                echo "无 Git 提交信息，跳过文件夹: $folder"
               fi
             fi
           done
@@ -76,7 +77,7 @@ jobs:
           echo "生成表格内容:"
           cat temp_table.md
           # 替换 README.md 中的贡献者表格
-          sed -i.bak '/<!-- ALL-CONTRIBUTORS-LIST:START -->/,/<!-- ALL-CONTRIBUTORS-LIST:END -->/c\<!-- ALL-CONTRIBUTORS-LIST:START -->\n'"$table"'\n<!-- ALL-CONTRIBUTORS-LIST:END -->' README.md
+          sed -i.bak '/<!-- ALL-CONTRIBUTORS-LIST:START -->/,/<!-- ALL-CONTRIBUTORS-LIST:END -->/c\<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->\n'"$table"'\n<!-- ALL-CONTRIBUTORS-LIST:END -->' README.md
           echo "更新后 README.md 贡献者部分:"
           grep -A 10 '<!-- ALL-CONTRIBUTORS-LIST:START -->' README.md || true
       - name: Commit Changes
