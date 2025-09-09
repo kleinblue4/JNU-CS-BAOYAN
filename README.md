@@ -23,9 +23,8 @@
 
 感谢以下同学为项目贡献了宝贵的保研经验！（按字母顺序排列）
 
-<!-- ALL-CONTRIBUTORS-LIST:START -->
-| 头像 | 贡献者 |
-|------|--------|
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<div style="display: flex; flex-wrap: wrap;"> <a href="https://github.com/kleinblue4"><img src="https://github.com/kleinblue4.png?size=40" alt="kleinblue4" title="kleinblue4" width="40" height="40" style="margin: 5px;" onerror="this.src='https://github.com/avatars/u/0'"></a></div>
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 **自动更新**：本列表由 GitHub Action 自动生成，基于 `SummerCamp` 和 `YuTuiMian` 下的所有年份目录。每当新的经验贴 PR 合并后，列表将自动更新，包括贡献者头像。
