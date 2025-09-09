@@ -3,6 +3,8 @@ name: Update Contributors List with Avatars
 on:
   pull_request:
     types: [closed]  # 在 PR 合并时触发
+    branches-ignore:
+      - 'auto-update-contributors-**' # 忽略自动创建的分支
   schedule:
     - cron: '0 0 * * 1'  # 每周一 UTC 午夜运行
   workflow_dispatch:  # 支持手动触发
@@ -108,3 +110,4 @@ jobs:
           title: '[自动] 更新贡献者列表 - ${{ env.BRANCH_NAME }}'
           body: '基于 SummerCamp 和 YuTuiMian 下的所有年份目录自动更新贡献者列表（仅显示头像，链接到 GitHub 主页）。'
           branch: ${{ env.BRANCH_NAME }}
+          base: main # 明确指定 PR 的目标分支
