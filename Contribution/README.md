@@ -4,23 +4,21 @@
 
 ## 📋 概述
 
-本指南介绍了通过在 `SummerCamp` 或 `YuTuiMian` 目录下添加 README.md 文件来分享夏令营或预推免经验贴的流程。您可以选择撰写新的经验贴，或链接到已在其他平台发布的经验贴以节省时间。所有贡献均通过 GitHub Web 界面完成，无需克隆仓库，简单高效。
+本指南介绍了通过在 `SummerCamp` 或 `YuTuiMian` 目录下添加 README.md 文件来分享夏令营或预推免经验贴的流程。您可以选择撰写新的经验贴，或链接到已在其他平台发布的经验贴以节省时间。
 
 ---
 
-## 🛠 步骤 1：创建文件夹和 README 文件
+## 🛠 步骤 1：Fork 仓库
 
 1. **访问 GitHub 仓库**\
-   打开项目在 GitHub 上的页面，导航到 `SummerCamp` 或 `YuTuiMian` 目录的具体年份文件夹下，具体取决于您要分享的经验贴类型。
+   打开项目在 GitHub 上的页面，在左上角点击 `Fork` 按钮，创建一个属于自己的该项目副本
 
 2. **创建新文件夹和 README 文件**
-   - 点击 “Add file” 下的 “Create new file” 按钮。
-   - 在文件名输入框中输入您的文件夹路径和文件名，例如：`czs/README.md`（`czs` 为您的文件夹名，建议使用您的姓名拼音或简短标识）。
+   - 在 Fork 的项目副本中，根据所分享的经验贴类型，在对应的文件夹(SummerCamp / YuTuiMian)中创建经验贴文件夹
+   - 在文件名输入框中输入您的文件夹路径和文件名，例如：`czs/README.md`（`czs` 为您的文件夹名，可以使用姓名缩写或自己的 GitHub 用户名）。
    - 请确保文件夹名专业且相关，避免使用不雅或过于随意的名称。😅
 
-![alt text](./assets/1.png)
-
-![alt text](./assets/2.png)
+![alt text](./assets/Figure1.png)
 
 ---
 
@@ -46,7 +44,6 @@
    ```markdown
    本经验贴已发布在：[链接标题](URL)
    ```
-   或者直接编辑项目根目录下的 `README.md`，添加您的经验贴链接。
 
 ---
 
@@ -55,32 +52,33 @@
 1. **上传图片或其他文件**\
    如果您的经验贴需要附加图片或其他文件：
    - 导航到您的文件夹（例如 `SummerCamp/2025/czs/`）。
-   - 点击“Upload files”按钮，选择要上传的文件（如 `image.jpg`）。
+   - 创建 `asset` 文件夹用于存放相关文件或图片
    - 确保文件命名清晰（如 `figure1.jpg`），并在 `README.md` 中引用，例如：
      ```markdown
      ![描述](image.jpg)
      ```
 
 2. **注意事项**\
-   - 尽量压缩图片以减少文件大小。
-   - 如果文件较大，请联系维护者确认是否支持 Git LFS 或其他存储方式。
+   - 尽量压缩图片和文件以减少文件大小。
+   - 如上传的文件过大，建议可以自己创建一个独立仓库来存放经验贴，然后在 README 中引用该仓库连接
 
 ---
 
 ## 🚀 步骤 3：提交拉取请求（PR）
 
 1. **创建新分支并提交 PR**\
-   - 在创建或上传文件后，点击右上角的 `Commit changes` 按钮。
-   - 在“Commit changes”部分，选择`“Create a new branch for this commit and start a pull request”`。
-   - 为分支命名，建议使用 `<您的名字>-YuTuiMian/SummerCamp`（如 `CaiZeSen-YuTuiMian`）。
-   - 点击“Propose new file”或“Commit changes”，然后点击“Create pull request”。
+   - 在完成经验贴的撰写后，通过副本仓库主界面的 `Contribute` 来提交 PR
+   - 在随后的界面中，填写该 PR 的相关描述信息，包括 title 与 description
 
-![alt text](./assets/3.png)
+![alt text](./assets/Figure2.png)
+
 
 2. **填写 PR 信息**\
    - 在 PR 标题中简要描述您的贡献，例如：“添加 xxx 的夏令营经验贴”。
    - 在描述中说明您的经验贴内容（如目录、主题等）。
    - 提交 PR，等待审核。
+
+![alt text](./assets/Figure3.png)
 
 ---
 
@@ -91,21 +89,20 @@
 
 2. **后续更新**\
    如果需要修改您的经验贴：
-   - 导航到您的文件夹（例如 `SummerCamp/czs/`）。
-   - 点击 `README.md` 或其他文件，选择“Edit this file”。
-   - 修改内容后，提交新的 PR（同样创建新分支）。
+   - 在自己 Fork 的仓库下，点击 `Sync fork` 按钮下的 `Update branch`，即可将仓库内容更新到最新版本
+   - 在最新版的项目中修改或更新相应文件
+   - 修改内容后，提交新的 PR ，参照步骤 1-3
    - 或者联系维护者，说明需要更新的内容。
 
 ---
 
 ## 💡 小贴士
 
-- **命名规范**：文件夹和文件名请保持专业且相关，例如 `czs/README.md`。
+- **命名规范**：文件夹和文件名请保持专业且相关，例如 `czs/README.md` 或 `klein/README.md`。
 - **内容质量**：确保经验贴清晰、简洁且对他人有帮助，检查 Markdown 格式是否正确（可在 GitHub 预览）。
-- **快速贡献**：Web 界面适合快速添加 README 文件，无需安装任何工具。
 - **文件管理**：上传图片时，建议使用描述性文件名，并确保在 README 中正确引用。
 - **遇到问题**：如有疑问或技术问题，请联系维护者！
 
 感谢您为我们的项目做出贡献！🎉
 
-如果有任何疑问，请 issue 问题或邮件联系：a2194037898@163.com
+如果有任何疑问，请 [issue](https://github.com/kleinblue4/JNU-CS-BAOYAN/issues) 问题或邮件联系：a2194037898@163.com
