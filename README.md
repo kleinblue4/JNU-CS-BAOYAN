@@ -35,7 +35,7 @@
 - **内容建议**：经验贴应清晰、简洁、有条理，提供对学弟学妹有价值的建议。
 - **格式规范**：请遵循模板或使用标准的 Markdown 格式，确保内容易读。
 - **问题反馈**：如有疑问或建议，请通过以下方式联系：
-  - 在 GitHub 提交 [Issue](https://github.com/JNU-CS-BAOYAN/issues)。
+  - 在 GitHub 提交 [Issue](https://github.com/kleinblue4/JNU-CS-BAOYAN/issues)。
   - 邮箱：a2194037898@163.com
 
 ## 🎉 感谢
