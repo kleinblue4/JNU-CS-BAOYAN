@@ -31,12 +31,26 @@ jobs:
             if [ -d "$dir" ] && [ -f "$dir/README.md" ]; then
               folder=$(basename "$dir")
               echo "处理文件夹: $dir"
+
+              # 从 Git 提交历史获取最新提交的 SHA 和邮箱
+              commit_info=$(git log -1 --pretty="%H %ae" "$dir/README.md")
+              commit_sha=$(echo "$commit_info" | awk '{print $1}')
+              git_email=$(echo "$commit_info" | awk '{print $2}')
+              echo "最新提交 SHA: $commit_sha"
+              echo "Git 提交者邮箱: $git_email"
+              if [ -n "$commit_sha" ] && [ -n "$git_email" ]; then
+                # 通过 GitHub API 获取提交者的 GitHub 用户名
+                github_username=$(curl -s -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
+                  "https://api.github.com/repos/${{ github.repository }}/commits/$commit_sha" | jq -r '.author.login // ""')
+                echo "API 查询结果: $github_username"
+              
               # 从 Git 提交历史获取提交者用户名
-              git_username=$(git log --pretty="%an" "$dir/README.md" | head -n 1)
-              if [ -n "$git_username" ]; then
-                # 尝试通过 GitHub API 获取 GitHub 用户名
-                github_username=$(curl -s -H "Authorization: Bearer ${{ secrets.PAT_TOKEN }}" \
-                  "https://api.github.com/search/users?q=$git_username in:name" | jq -r '.items[0].login // ""')
+              # git_username=$(git log --pretty="%an" "$dir/README.md" | head -n 1)
+              # if [ -n "$git_username" ]; then
+              #  # 尝试通过 GitHub API 获取 GitHub 用户名
+              #  github_username=$(curl -s -H "Authorization: Bearer ${{ secrets.PAT_TOKEN }}" \
+              #    "https://api.github.com/search/users?q=$git_username in:name" | jq -r '.items[0].login // ""')
+                  
                 if [ -n "$github_username" ]; then
                   echo "找到 Git 用户名: $folder -> $github_username"
                   contributors="$contributors$github_username,"
