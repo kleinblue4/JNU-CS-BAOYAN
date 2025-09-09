@@ -69,11 +69,9 @@ jobs:
           echo "生成表格内容:"
           cat temp_table.md
           # 替换 README.md 中的贡献者表格
-          sed -i.bak '/<!-- ALL-CONTRIBUTORS-LIST:START -->/,/<!-- ALL-CONTRIBUTORS-LIST:END -->/c\<!-- ALL-CONTRIBUTORS-LIST:START -->\n'"$table"'\n<!-- ALL-CONTRIBUTORS-LIST:END -->' README.md
+          sed -i.bak '/<!-- ALL-CONTRIBUTORS-LIST:START -->/,/<!-- ALL-CONTRIBUTORS-LIST:END -->/c\<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->\n'"$table"'\n<!-- ALL-CONTRIBUTORS-LIST:END -->' README.md
           echo "更新后 README.md 贡献者部分:"
           grep -A 10 '<!-- ALL-CONTRIBUTORS-LIST:START -->' README.md || true
-          rm temp_table.md
-          rm README.md.bak
       - name: Commit Changes
         run: |
           git config --global user.name 'github-actions[bot]'
@@ -89,6 +87,6 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           commit-message: 'docs: 更新贡献者列表（仅头像）'
-          title: '[自动] 更新贡献者列表'
+          title: '[自动] 更新贡献者列表 - ${{ env.BRANCH_NAME }}'
           body: '基于 SummerCamp 和 YuTuiMian 下的所有年份目录自动更新贡献者列表（仅显示头像，链接到 GitHub 主页）。'
           branch: ${{ env.BRANCH_NAME }}
