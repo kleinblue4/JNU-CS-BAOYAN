@@ -2,7 +2,7 @@ name: Update Contributors List with Avatars
 
 on:
   schedule:
-    - cron: '0 7 * * *'  # 每周一 UTC 午夜运行
+    - cron: '0 7 * * 1'  # 每周一 UTC 午夜运行
   workflow_dispatch:  # 支持手动触发
 
 permissions:
@@ -17,6 +17,15 @@ jobs:
         with:
           fetch-depth: 0  # 获取完整 Git 历史以提取提交者
           token: ${{ secrets.PAT_TOKEN }}  # 使用 PAT 检出仓库
+      - name: Check for Changes
+        run: |
+          git fetch origin
+          git checkout main
+          changes=$(git log --oneline origin/main..HEAD -- SummerCamp YuTuiMian || true)
+          if [ -z "$changes" ]; then
+            echo "没有新变更，跳过工作流"
+            exit 0
+          fi
       - name: Set Branch Name
         run: |
           echo "BRANCH_NAME=auto-update-contributors-$(date +%Y-%m-%d)" >> $GITHUB_ENV
@@ -107,3 +116,4 @@ jobs:
           body: '基于 SummerCamp 和 YuTuiMian 下的所有年份目录自动更新贡献者列表（仅显示头像，链接到 GitHub 主页）。'
           branch: ${{ env.BRANCH_NAME }}
           base: main # 明确指定 PR 的目标分支
+          delete-branch: true  # PR 合并后自动删除分支
