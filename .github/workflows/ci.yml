@@ -1,5 +1,6 @@
 # .github/workflows/ci.yml
 name: PR-Guard
+
 on:
   pull_request:
     paths: '**/*'
@@ -8,27 +9,45 @@ jobs:
   check:
     runs-on: ubuntu-latest
     steps:
+      # 1. 检出代码（需要完整历史做 diff）
       - uses: actions/checkout@v4
         with:
-          fetch-depth: 0          # 需要完整历史做 diff
-      - name: Get changed files
+          fetch-depth: 0
+
+      # 2. 收集本次 PR 新增的所有目录（去重、去掉根目录 "."）
+      - name: Get changed dirs
         id: changed
         run: |
-          # 找出本次 PR 新增目录
-          NEW_DIRS=$(git diff --name-only origin/main...HEAD | xargs -I{} dirname {} | sort -u | grep -v '^\.$')
-          echo "NEW_DIRS=$NEW_DIRS" >> $GITHUB_OUTPUT
+          # 拼成一行，空格分隔
+          NEW_DIRS=$(git diff --name-only origin/main...HEAD \
+                     | xargs -I{} dirname {} \
+                     | sort -u \
+                     | grep -v '^\.$' \
+                     | tr '\n' ' ')
+          echo "NEW_DIRS=$NEW_DIRS" >> "$GITHUB_OUTPUT"
+
+      # 3. 校验：每个新目录下必须存在 README.md，且根目录下不能已存在同名文件夹
       - name: Ensure unique folder & README
         run: |
-          for d in ${{ steps.changed.outputs.NEW_DIRS }}; do
+          # 把输出变量读回来
+          NEW_DIRS="${{ steps.changed.outputs.NEW_DIRS }}"
+
+          # 3.1 检查 README.md
+          for d in $NEW_DIRS; do
             if [ -d "$d" ] && [ ! -f "$d/README.md" ]; then
-              echo "❌ $d 缺少 README.md"; exit 1
+              echo "::error::$d 缺少 README.md"
+              exit 1
             fi
           done
-          # 检查根目录下是否已存在同名文件夹（防止重复）
-          for d in ${{ steps.changed.outputs.NEW_DIRS }}; do
+
+          # 3.2 检查根目录同名文件夹是否已存在
+          for d in $NEW_DIRS; do
             BASE=$(basename "$d")
-            if [ $(find . -maxdepth 1 -type d -name "$BASE" | wc -l) -gt 1 ]; then
-              echo "❌ 文件夹 $BASE 已存在"; exit 1
+            # 只在根目录（-maxdepth 1）统计同名目录数量
+            if [ "$(find . -maxdepth 1 -type d -name "$BASE" | wc -l)" -gt 1 ]; then
+              echo "::error::文件夹 $BASE 已在根目录存在"
+              exit 1
             fi
           done
-          echo "✅ 检查通过"
+
+          echo "::notice::✅ 检查通过"
