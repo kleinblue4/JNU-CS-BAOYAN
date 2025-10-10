@@ -2,7 +2,13 @@
 
 bg请参考夏令营凉凉经，点此跳转[pingpig的夏令营一手凉凉经](https://github.com/pingpighsy/JNU-CS-BAOYAN/tree/main/SummerCamp/2025/pingpig)。
 
-[TOC]
+- [pingpig的预推免摆烂回顾](#pingpig的预推免摆烂回顾)
+  - [💡经历](#经历)
+    - [Abstract~~抽象~~](#abstract抽象)
+    - [中山cs](#中山cs)
+    - [南大cs](#南大cs)
+  - [:fire:建议](#fire建议)
+
 
 ## 💡经历
 
