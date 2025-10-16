@@ -61,7 +61,7 @@
 
 设计学院IIDE学费16w/期，超预算可直接跳过本节。<br/>
 
-# 一些有用的链接：<br/>
+#### 一些有用的链接：<br/>
 （1）报名通知：https://designschool.sjtu.edu.cn/dynamic/notice/detail/683ec345dc5d7120f93f52a7 <br/>
 （2）开营方案：https://designschool.sjtu.edu.cn/dynamic/notice/detail/686dd826edc99039b2fc1e53 <br/>
 （3）成果展示：https://designschool.sjtu.edu.cn/dynamic/news/detail/68b27b6f6f236c2617d567cd <br/>
