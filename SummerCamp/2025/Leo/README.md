@@ -11,9 +11,6 @@
     - [4 浙江大学](#4-浙江大学)
     - [5 华东师范大学](#5-华东师范大学)
 
-## 交互（or计算机+设计）方向学校/学院资料链接
-本人收集的相关院校资料，仅限计算机+设计方向，几乎涵盖所有（如果遗漏可联系补充），其中还有部分个人观点，仅供参考。<br/>
-Notion链接：https://www.notion.so/1b3bdb384375806cacb0d7d724a41dd6?source=copy_link
 
 ## 个人 bg
 
@@ -26,6 +23,10 @@ Notion链接：https://www.notion.so/1b3bdb384375806cacb0d7d724a41dd6?source=cop
 | 论文 | EI期刊/会议/SCI二区 |
 
 联系方式：1926876072@qq.com
+
+## 交互（or计算机+设计）方向学校/学院资料链接
+本人收集的相关院校资料，仅限计算机+设计方向，几乎涵盖所有（如果遗漏可联系补充），其中还有部分个人观点，仅供参考。<br/>
+Notion链接：https://www.notion.so/1b3bdb384375806cacb0d7d724a41dd6?source=copy_link
 
 ## 各院校参与情况
 
