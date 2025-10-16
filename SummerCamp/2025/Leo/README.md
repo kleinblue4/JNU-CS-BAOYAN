@@ -65,7 +65,7 @@ Notion链接：https://www.notion.so/1b3bdb384375806cacb0d7d724a41dd6?source=cop
 
 ### 3 上海交通大学
 
-设计学院IIDE学费16w/期，超预算可直接跳过本节。<br/>
+设计学院IIDE学费16w/期😲，超预算可直接跳过本节。<br/>
 
 #### 一些有用的链接：
 （1）报名通知：https://designschool.sjtu.edu.cn/dynamic/notice/detail/683ec345dc5d7120f93f52a7 <br/>
